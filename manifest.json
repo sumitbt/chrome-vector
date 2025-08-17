@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "My Custom Site Scripts",
+  "version": "1.0",
+  "description": "A personal extension to apply custom logic to specific websites.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://x.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://x.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
