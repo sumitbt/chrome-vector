@@ -7,3 +7,14 @@
 - Three new buttons will appear: "Load unpacked", "Pack extension...", and "Update". Click on "Load unpacked".
 - A file selection dialog will open. Navigate to and select the `chrome-vector` folder you created.
 - Your extension should now appear in the list of extensions!
+
+## Current features:
+
+- Hide the "For You" tab when visiting x.com
+- This helps you stay focused on the accounts you follow reducing distraction
+
+## Future features:
+
+- Hide ads on x.com
+- Aggregate posts from multiple subreddits into single page
+- Hide ads from reddit
