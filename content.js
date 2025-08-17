@@ -4,21 +4,20 @@
  * ensuring the tab is hidden even if it appears after the initial page load.
  */
 function hideForYouTab() {
-  // The "For you" and "Following" tabs are links within a navigation role.
-  const navLinks = document.querySelectorAll('nav[role="navigation"] a[role="tab"]');
+  // Find all links that act as tabs.
+  const tabLinks = document.querySelectorAll('a[role="tab"]');
 
-  for (const link of navLinks) {
+  for (const link of tabLinks) {
     // Find the link that contains the "For you" text.
-    // We check for a span inside the link, as that's where the text is.
     const span = link.querySelector('span');
     if (span && span.innerText.trim() === 'For you') {
-      // The link is inside a list item which represents the whole tab.
-      const tabElement = link.closest('li');
+      // Based on the new structure, the element to hide is the parent div with role="presentation".
+      const tabElement = link.closest('div[role="presentation"]');
       if (tabElement) {
         console.log('Hiding "For you" tab.');
         tabElement.style.display = 'none';
         // Once we've found and hidden it, we can stop looking.
-        return true; 
+        return true;
       }
     }
   }
@@ -32,9 +31,10 @@ function hideForYouTab() {
 const observer = new MutationObserver((mutations, obs) => {
   // We run our function to find and hide the tab.
   const isHidden = hideForYouTab();
-  // If the tab was successfully hidden, we don't need to observe anymore.
+  // If the tab was successfully hidden, we can disconnect the observer
+  // for this page view to save resources.
   if (isHidden) {
-    obs.disconnect(); // Stop observing to save resources.
+    obs.disconnect();
   }
 });
 
