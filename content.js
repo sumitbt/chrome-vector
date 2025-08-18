@@ -1,39 +1,59 @@
 /**
- * This function looks for the "For you" tab on X.com and hides it.
- * It uses a MutationObserver to handle dynamically loaded content,
- * ensuring the tab is hidden even if it appears after the initial page load.
+ * This function finds and hides the "For you" tab on X.com,
+ * and then selects the "Following" tab to ensure the correct feed is displayed.
+ * It uses a MutationObserver to handle dynamically loaded content.
  */
-function hideForYouTab() {
+function switchTabs() {
   // Find all links that act as tabs.
   const tabLinks = document.querySelectorAll('a[role="tab"]');
 
+  let forYouTabFound = false;
+  let followingTabLink = null;
+
+  // First, find the "Following" tab link so we can click it later.
   for (const link of tabLinks) {
-    // Find the link that contains the "For you" text.
+    const span = link.querySelector('span');
+    if (span && span.innerText.trim() === 'Following') {
+      followingTabLink = link;
+      break; // Found it, no need to continue this loop.
+    }
+  }
+
+  // Now, find and hide the "For you" tab.
+  for (const link of tabLinks) {
     const span = link.querySelector('span');
     if (span && span.innerText.trim() === 'For you') {
-      // Based on the new structure, the element to hide is the parent div with role="presentation".
-      const tabElement = link.closest('div[role="presentation"]');
-      if (tabElement) {
+      const tabElementToHide = link.closest('div[role="presentation"]');
+      if (tabElementToHide) {
         console.log('Hiding "For you" tab.');
-        tabElement.style.display = 'none';
-        // Once we've found and hidden it, we can stop looking.
+        tabElementToHide.style.display = 'none';
+        forYouTabFound = true;
+
+        // If the "Following" tab exists and is not already selected, click it.
+        // This ensures the content switches to the "Following" feed.
+        if (followingTabLink && followingTabLink.getAttribute('aria-selected') === 'false') {
+          console.log('Clicking "Following" tab.');
+          followingTabLink.click();
+        }
+        // Once we've processed the "For you" tab, our work is done.
         return true;
       }
     }
   }
-  return false; // Return false if not found yet.
+
+  return false; // Return false if the "For you" tab wasn't found yet.
 }
 
 /**
  * Since X.com is a single-page application, content is loaded dynamically.
- * A MutationObserver is the most reliable way to watch for the tab to appear.
+ * A MutationObserver is the most reliable way to watch for the tabs to appear.
  */
 const observer = new MutationObserver((mutations, obs) => {
-  // We run our function to find and hide the tab.
-  const isHidden = hideForYouTab();
-  // If the tab was successfully hidden, we can disconnect the observer
+  // We run our function to find, hide, and switch tabs.
+  const isDone = switchTabs();
+  // If the actions were successfully completed, we can disconnect the observer
   // for this page view to save resources.
-  if (isHidden) {
+  if (isDone) {
     obs.disconnect();
   }
 });
@@ -45,4 +65,4 @@ observer.observe(document.body, {
 });
 
 // Also run it once on initial load, just in case.
-hideForYouTab();
+switchTabs();
