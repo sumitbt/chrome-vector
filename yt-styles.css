@@ -1,0 +1,19 @@
+/* This file hides YouTube Shorts sections from the main YouTube website.
+  We use !important to ensure our styles override the site's default styles.
+*/
+
+/* Hides the "Shorts" shelf on the homepage and subscription feeds */
+ytd-rich-shelf-renderer[is-shorts],
+ytd-reel-shelf-renderer {
+  display: none !important;
+}
+
+/* Hides the "Shorts" link in the main navigation menu on the left */
+ytd-guide-entry-renderer a[title="Shorts"] {
+  display: none !important;
+}
+
+/* Hides the "Shorts" tab on channel pages */
+yt-tab-shape[tab-title="Shorts"] {
+    display: none !important;
+}

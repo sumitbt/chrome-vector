@@ -22,6 +22,10 @@
     {
       "matches": ["*://music.youtube.com/*"],
       "css": ["yt-music-styles.css"]
+    },
+    {
+      "matches": ["*://www.youtube.com/*"],
+      "css": ["yt-styles.css"]
     }
   ],
   "action": {

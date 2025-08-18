@@ -13,6 +13,7 @@
 - Hide the "For You" tab when visiting x.com
 - This helps you stay focused on the accounts you follow reducing distraction
 - Hide all the images on music.youtube.com
+- Hide the Shorts sections from youtube.com
 
 ## Future features:
 
