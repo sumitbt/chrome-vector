@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "My Custom Site Scripts",
+  "name": "Chrome Vector",
   "version": "1.0",
   "description": "A personal extension to apply custom logic to specific websites.",
   "permissions": [
