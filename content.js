@@ -1,3 +1,7 @@
+/******************************************************************************
+ * X.COM SPECIFIC FUNCTIONS
+ *****************************************************************************/
+
 /**
  * This function finds and hides the "For you" tab on X.com,
  * and then selects the "Following" tab to ensure the correct feed is displayed.
@@ -40,7 +44,7 @@ function switchTabs() {
 }
 
 /**
- * Creates and injects a custom logout button into the main navigation menu.
+ * Creates and injects a custom logout button into the main navigation menu on X.com.
  */
 function addLogoutButton() {
   const CUSTOM_BUTTON_ID = 'custom-logout-button';
@@ -96,25 +100,33 @@ function addLogoutButton() {
 }
 
 
-/**
- * Since X.com is a single-page application, content is loaded dynamically.
- * A MutationObserver is the most reliable way to watch for elements to appear.
- * We will NOT disconnect it, which makes it more robust for handling navigation
- * within the site without needing a page refresh.
- */
-const observer = new MutationObserver((mutations) => {
-  // Run all our customization functions on each DOM change.
-  // The functions themselves are responsible for not re-doing work.
+/******************************************************************************
+ * MAIN EXECUTION LOGIC
+ *****************************************************************************/
+
+// Check which site we are on.
+const hostname = window.location.hostname;
+
+// Only run logic for the specific site we're on.
+if (hostname.includes('x.com')) {
+  /**
+   * Since X.com is a single-page application, content is loaded dynamically.
+   * A MutationObserver is the most reliable way to watch for elements to appear.
+   */
+  const observer = new MutationObserver((mutations) => {
+    // Run all our customization functions on each DOM change.
+    // The functions themselves are responsible for not re-doing work.
+    switchTabs();
+    addLogoutButton();
+  });
+
+  // Start observing the entire document body for changes in the DOM tree.
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  // Also run them once on initial load, just in case the elements are already there.
   switchTabs();
   addLogoutButton();
-});
-
-// Start observing the entire document body for changes in the DOM tree.
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
-
-// Also run them once on initial load, just in case the elements are already there.
-switchTabs();
-addLogoutButton();
+}

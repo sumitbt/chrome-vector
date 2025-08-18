@@ -1,0 +1,16 @@
+/* This file hides images on YouTube Music.
+  We use !important to ensure our styles override the site's default styles.
+*/
+
+/* Hide all standard image elements (album art, artist pics, etc.) */
+img,
+yt-img-shadow {
+  visibility: hidden !important;
+}
+
+/* Remove background images from headers and backgrounds */
+#background.ytmusic-browse-response,
+ytmusic-immersive-header-renderer {
+  background-image: none !important;
+  background-color: #111 !important; /* Set a dark fallback background */
+}
