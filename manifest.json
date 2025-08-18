@@ -8,7 +8,9 @@
   ],
   "host_permissions": [
     "*://x.com/*",
-    "*://music.youtube.com/*"
+    "*://music.youtube.com/*",
+    "*://www.youtube.com/*",
+    "*://www.instagram.com/*"
   ],
   "background": {
     "service_worker": "background.js"
@@ -26,6 +28,11 @@
     {
       "matches": ["*://www.youtube.com/*"],
       "css": ["yt-styles.css"]
+    },
+    {
+      "matches": ["*://www.instagram.com/*"],
+      "css": ["instagram-styles.css"],
+      "js": ["instagram.js"]
     }
   ],
   "action": {

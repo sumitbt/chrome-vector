@@ -1,3 +1,5 @@
+# Chrome Vector
+
 ## Load the Extension in Chrome
 
 - Download the repo to your local file system.
@@ -8,14 +10,15 @@
 - A file selection dialog will open. Navigate to and select the `chrome-vector` folder you created.
 - Your extension should now appear in the list of extensions!
 
-## Current features:
+## Current features
 
 - Hide the "For You" tab when visiting x.com
 - This helps you stay focused on the accounts you follow reducing distraction
 - Hide all the images on music.youtube.com
 - Hide the Shorts sections from youtube.com
+- Hide ads, suggested posts, explore page and reels page on instagram.com
 
-## Future features:
+## Future features
 
 - Hide ads on x.com
 - Aggregate posts from multiple subreddits into single page

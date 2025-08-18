@@ -1,0 +1,8 @@
+/* Hides the "Explore" link in the main navigation menu on Instagram */
+a[href="/explore/"] {
+    display: none !important;
+}
+
+a[href="/reels/"] {
+    display: none !important;
+}
